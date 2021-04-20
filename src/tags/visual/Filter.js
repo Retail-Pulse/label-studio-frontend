@@ -31,7 +31,7 @@ const TagAttrs = types.model({
 
   cleanup: types.optional(types.boolean, true),
 
-  placeholder: types.optional(types.string, "Quick Filter"),
+  placeholder: types.optional(types.string, "Quick Filters"),
   minlength: types.optional(types.string, "3"),
   hotkey: types.maybeNull(types.string),
 });
@@ -66,10 +66,19 @@ const Model = types
 
       tch.forEach(ch => {
         let chval = ch._value;
+        let flag = 0;
         if (!self.casesensetive) chval = chval.toLowerCase();
+        const mergedChVal = chval.replace(/\s/g, '');
+        value = value.replace(/\s\s+/g, ' ');
+        const chArr = value.split(" ")
+        chArr.forEach( elem => {
+          if (elem !== "" && mergedChVal.indexOf(elem) !== -1) {ch.setVisible(true); flag =1;}
+        })
+        const mergedValue = value.replace(/\s/g, '');
+        if (mergedChVal.indexOf(mergedValue) !== -1) { ch.setVisible(true); flag =1; }
 
-        if (chval.indexOf(value) !== -1) ch.setVisible(true);
-        else ch.setVisible(false);
+        if (chval.indexOf(value) !== -1) { ch.setVisible(true); flag =1; }
+        if (flag === 0) ch.setVisible(false);
       });
     },
 
