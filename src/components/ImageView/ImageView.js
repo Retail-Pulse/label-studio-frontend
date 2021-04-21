@@ -323,6 +323,8 @@ export default observer(
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "space-between",
+            height: "60vh",
+            overflowY: "auto",
           }}
         >
           <div

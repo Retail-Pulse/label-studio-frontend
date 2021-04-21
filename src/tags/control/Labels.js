@@ -93,6 +93,8 @@ const HtxLabels = observer(({ item }) => {
     alignItems: "center",
     flexFlow: "wrap",
     marginLeft: "-5px",
+    maxHeight: "25vh",
+    overflowY: "auto",
   };
 
   if (!item.showinline) {
